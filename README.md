@@ -32,7 +32,7 @@
 - `export CROSS_COMPILE=~/toolchain/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-` or (*export CROSS_COMPILE=aarch64-poky-linux-*)
 - `make distclean`
 - `make imx8mq_evk_defconfig`
-- `make flash.bin -j8`
+- `make flash.bin`
 
 - Burn the **flash.bin** to microSD card from (any) Linux Device (offset 33KB):
 ```bash
@@ -56,3 +56,27 @@
 ## Reference
 - https://developer.solid-run.com/knowledge-base/i-mx8m-atf-u-boot-and-linux-kernel/
 - https://github.com/km-tek/uboot-imx/blob/lf_v2021.04/doc/board/freescale/imx8mq_evk.rst
+
+# How to configure U-Boot for your board (i.MX8)
+
+### 1. Add your board device tree: **arch/arm/dts/\<board>.dts** and **\<board>-u-boot.dtsi**.
+- For example, add **arch/arm/dts/imx8mm-demo.dts** and **arch/arm/dts/imx8mm-demo-u-boot.dtsi**.
+
+### 2. Update arch/arm/dts/Makefile to compile your device tree
+- For example i.MX8:
+```
+dtb-$(CONFIG_ARCH_IMX8M) += \
+ 	<board>.dtb \
+ 	imx8mm-demo.dtb
+```
+### 3. Create your own board support directory: **board/\<vendor>/\<board>**.
+- For example, add folder **board/kmt/imx8mm-demo**.
+
+### 4. Add TARGET_\<VENDOR>_\<BOARD> in Kconfig
+- For example i.MX8, update **arch/arm/mach-imx/imx8m/Kconfig**.
+
+### 5. Create your board defconfig: configs/\<board>_defconfig.
+- For example, add **configs/imx8mm_demo_defconfig**.
+
+### 6. Add your configuration file : include/configs/\<board>.h.
+- For example, add **include/configs/imx8mm-demo.h**.
