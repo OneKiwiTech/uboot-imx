@@ -1,0 +1,10 @@
+Kmtek iMX8M Mini
+M:	Oleksandr Suvorov <oleksandr.suvorov@toradex.com>
+W:	https://www.toradex.com/computer-on-modules/verdin-arm-family/nxp-imx-8m-mini
+S:	Maintained
+F:	arch/arm/dts/imx8mm-demo.dts
+F:	arch/arm/dts/imx8mm-demo-u-boot.dtsi
+F:	board/kmt/imx8mm-demo/
+F:	configs/imx8mm_demo_defconfig
+F:	doc/board/toradex/verdin-imx8mm.rst
+F:	include/configs/imx8mm-demo.h
