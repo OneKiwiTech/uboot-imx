@@ -80,3 +80,40 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
 
 ### 6. Add your configuration file : include/configs/\<board>.h.
 - For example, add **include/configs/imx8mm-demo.h**.
+
+# Build Maaxboard Mini
+
+## Get U-Boot
+- `mkdir maaxboard-uboot`
+- `cd maaxboard-uboot`
+- `git clone https://github.com/km-tek/uboot-imx.git -b lf_v2021.04`
+
+## Get U-Boot
+- `cd maaxboard-uboot`
+- `wget https://www.nxp.com/lgfiles/NMG/MAD/YOCTO/firmware-imx-8.13.bin`
+- `chmod +x firmware-imx-8.13.bin`
+- `./firmware-imx-8.13.bin`
+- `cp firmware-imx-8.13/firmware/ddr/synopsys/ddr4*.bin uboot-imx` (copy to uboot folder)
+
+## Get and Build the ARM Trusted firmware
+- `cd maaxboard-uboot`
+- `git clone https://github.com/km-tek/imx-atf.gi -b lf_v2.4`
+- `cd imx-atf`
+- `export CROSS_COMPILE=~/toolchain/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-`
+- `make PLAT=imx8mm bl31` (NXP i.MX8M Mini)
+- `cp build/imx8mm/release/bl31.bin ../uboot-imx` (copy **bl31.bin** to uboot folder)
+
+## Build U-Boot
+- `cd uboot-imx` (from Get U-Boot)
+- `export ARCH=arm64`
+- `export CROSS_COMPILE=~/toolchain/gcc-linaro-7.3.1-2018.05-x86_64_aarch64-linux-gnu/bin/aarch64-linux-gnu-` or (*export CROSS_COMPILE=aarch64-poky-linux-*)
+- `export ATF_LOAD_ADDR=0x920000`
+- `make distclean`
+- `make imx8mm_maaxboard_defconfig`
+- `make flash.bin`
+
+- Burn the **flash.bin** to microSD card from (any) Linux Device (offset 33KB):
+```bash
+    sudo dd if=flash.bin of=/dev/sd[x] bs=1024 seek=33 conv=notrunc
+```
+- For example : `sudo dd if=flash.bin of=/dev/mmcblk0 bs=1024 seek=33 conv=notrunc`
