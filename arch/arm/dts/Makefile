@@ -883,6 +883,7 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
 	imx8mn-ddr4-ab2.dtb \
 	imx8mn-ddr3l-ab2.dtb \
 	imx8mn-ab2.dtb \
+	imx8mm-maaxboard.dtb \
 	imx8mm-demo.dtb
 
 dtb-$(CONFIG_ARCH_IMXRT) += imxrt1050-evk.dtb \
