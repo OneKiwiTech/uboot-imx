@@ -1,0 +1,8 @@
+Avnet Maaxboard Mini
+M:	Phu Truong <phutruong@kienminh.net>
+S:	Maintained
+F:	arch/arm/dts/imx8mm-maaxboard.dts
+F:	arch/arm/dts/imx8mm-maaxboard-u-boot.dtsi
+F:	board/freescale/imx8mm_maaxboard/
+F:	include/configs/imx8mm_maaxboard.h
+F:	configs/imx8mm_maaxboard_defconfig
