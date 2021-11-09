@@ -242,6 +242,12 @@ config TARGET_IMX8MM_DEMO
 	select SUPPORT_SPL
 	select IMX8M_LPDDR4
 
+config TARGET_IMX8MM_MAAXBOARD
+	bool "Avnet Maaxboard Mini"
+	select IMX8MM
+	select SUPPORT_SPL
+	select IMX8M_DDR4
+
 config TARGET_IMX8MM_BEACON
 	bool "imx8mm Beacon Embedded devkit"
 	select IMX8MM
@@ -282,6 +288,7 @@ source "board/beacon/imx8mm/Kconfig"
 source "board/beacon/imx8mn/Kconfig"
 source "board/phytec/phycore_imx8mm/Kconfig"
 source "board/phytec/phycore_imx8mp/Kconfig"
+source "board/freescale/imx8mm_maaxboard/Kconfig"
 source "board/kmt/imx8mm-demo/Kconfig"
 
 endif
